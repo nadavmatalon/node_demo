@@ -1,65 +1,76 @@
-<!doctype>
+<!DOCTYPE>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Noogle Docs</title>
+    <head>
+        <title>noogle-docs</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <script src='http://code.jquery.com/jquery-2.1.1.min.js'></script>
+        <script src='https://cdn.socket.io/socket.io-1.0.4.js'></script>
+        <style>
+            .header {
+                border-bottom: 1px solid #ccc;
+                margin-top: 15px;
+            }
 
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <style>
-      .header {
-        border-bottom: 1px solid #ccc;
-        margin-top: 15px;
-      }
+            .header h3 {
+                padding-bottom: 19px;
+                margin-top: 0;
+                margin-bottom: 0;
+                line-height: 40px;
+            }
 
-      .header h3 {
-        padding-bottom: 19px;
-        margin-top: 0;
-        margin-bottom: 0;
-        line-height: 40px;
-      }
+            .container .jumbotron {
+                background: #ccc;
+                margin-top: 15px;
+                padding: 5px;
+                padding-left: 35px;
+                padding-right: 35px;
+            }
 
-      .container .jumbotron {
-        background: #ccc;
-        margin-top: 15px;
-        padding: 5px;
-        padding-left: 35px;
-        padding-right: 35px;
-      }
+            textarea {
+                font-size: 20px;
+                width: 100%;
+                margin: 10px 0 30px 0;
+                padding: 10px 15px;
+                resize: none;
+                height: 250px;
+            }
 
-      textarea {
-        font-size: 20px;
-        width: 100%;
-        margin: 10px 0 30px 0;
-        padding: 10px 15px;
-        resize: none;
-        height: 250px;
-      }
-
-      @media (min-width: 768px) {
-        .container {
-          max-width: 730px;
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="container">
-      <div class="header">
-        <h3 class="text-muted">0 users online</h3>
-      </div>
-
-      <div class="jumbotron">
-        <h1>Noogle Docs</h1>
-        <textarea autocorrect="off" autocapitalize="off"></textarea>
-      </div>
-    </div>
-
-    <script src='http://code.jquery.com/jquery-2.1.1.min.js'></script>
-    <script src='/socket.io/socket.io.js'></script>
+            @media (min-width: 768px) {
+                .container {
+                    max-width: 730px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h3 class="text-muted">0 users online</h3>
+            </div>
+            <div class="jumbotron">
+                <h1>noogle-docs</h1>
+                <textarea autocorrect="off" autocapitalize="off"></textarea>
+            </div>
+        </div>
+    </body>
     <script>
+        var socket = io();
+
+        socket.on('userCountChanged', function(newUserCount) {
+            $('h3').text(newUserCount + ' users online');
+        });
+
+        socket.on('fileRead', function(contents) {
+            $('textarea').val(contents);
+        });
+
+        $('textarea').on('keyup', function() {
+            socket.emit('textUpdated', $(this).val());
+        });
+
     </script>
-  </body>
 </html>
+

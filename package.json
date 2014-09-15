@@ -1,10 +1,10 @@
 {
-  "name": "noogle-docs",
-  "version": "1.0.0",
-  "dependencies": {
-    "express": "4.4.3",
-    "socket.io": "1.0.4",
-    "nodemon": "1.2.0",
-    "pluralize": "0.0.10"
-  }
+	"name": "noogle-docs",
+	"version": "1.0.0",
+	"dependencies": {
+		"express": "4.4.3",
+		"socket.io": "1.0.4",
+		"nodemon": "1.2.0",
+		"pluralize": "0.0.10"
+	}
 }

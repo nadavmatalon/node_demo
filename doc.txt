@@ -1,1 +1,6 @@
-The rain in Spain falls mainly on the plain. She picks seashells on the seashore. Peter Piper picked a peck of pickled peppers.
+The cat sat on the mat. 
+The quick brown fox jumped over the lazy dog.
+The rain in Spain falls mainly on the plain. 
+She picks seashells on the seashore. 
+Peter Piper picked a peck of pickled peppers.
+

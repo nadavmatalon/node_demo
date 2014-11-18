@@ -8,8 +8,8 @@ function updateUserCount(change) {
     io.emit('userCountChanged', userCount);
 }
 
-app.get('/', function(request, response) {
-    response.sendfile('index.html');
+app.get('/', function(req, res) {
+    res.sendFile(__dirname + '/index.html');
 });
 
 var userCount = 0;
@@ -30,7 +30,7 @@ io.on('connect', function(socket) {
 
     socket.on('textUpdated', function(newText) {
         fs.writeFile('doc.txt', newText);
-            io.emit('fileRead', newText);
+        io.emit('fileRead', newText);
     });
 });
 
